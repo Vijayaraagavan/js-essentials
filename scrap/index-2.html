@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Tree Memory Leak Example</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        #container { border: 1px solid #ccc; padding: 10px; min-height: 100px; margin-top: 20px; }
+        .box { width: 10px; height: 10px; background-color: lightblue; border: 1px solid steelblue; float: left; margin: 1px; }
+    </style>
+</head>
+<body>
+    <h1>DOM Tree Memory Leak Demo</h1>
+    <p>Click the button multiple times and observe the "Memory" panel in Chrome DevTools.</p>
+    <button id="createAndRemoveBtn">Create & Remove DOM (Leak)</button>
+    <button id="clearLeakBtn">Clear Leak Reference</button>
+    <p>
+        <label>Number of boxes to create:</label>
+        <input type="number" id="numBoxes" value="1000" min="1">
+    </p>
+
+    <div id="container">
+        </div>
+
+    <script src="index-2.js"></script>
+</body>
+</html>

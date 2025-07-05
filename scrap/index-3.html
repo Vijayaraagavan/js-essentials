@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe Content Methods</title>
+    <style>
+        .method-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .method-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        iframe {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Adding HTML Content to Iframe - No JavaScript Required</h1>
+
+    <!-- Method 1: Using srcdoc attribute -->
+    <div class="method-section">
+        <div class="method-title">Method 1: Using srcdoc attribute</div>
+        <p>Directly embed HTML content using the srcdoc attribute:</p>
+        <iframe srcdoc="
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+                    h1 { color: #333; }
+                    .content { background: white; padding: 15px; border-radius: 5px; }
+                    .btn {
+                        background-color: #4CAF50;
+                        color: white;
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        position: absolute;
+                        top: -125px;
+                        z-index: 1000;
+                    }
+                </style>
+            </head>
+            <script>
+                const test = () => {
+                    alert('Button clicked inside iframe!')
+                }
+            </script>
+            <body>
+                <h1>Content from srcdoc</h1>
+                <div class='content'>
+                    <p>This content is embedded directly in the iframe using the srcdoc attribute.</p>
+                    <ul>
+                        <li>No JavaScript required</li>
+                        <li>No origin restrictions</li>
+                        <li>Content is part of the parent page</li>
+                    </ul>
+                </div>
+                <button class='btn' onclick='test()'>Click Me</button>
+            </body>
+            </html>
+        "></iframe>
+    </div>
+
+    <!-- Method 2: Using data URI -->
+    <div class="method-section">
+        <div class="method-title">Method 2: Using data URI</div>
+        <p>Embed HTML content using a data URI:</p>
+        <iframe src="data:text/html;charset=utf-8,
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; background: #e8f4f8; }
+                    h1 { color: #2c5aa0; }
+                    .highlight { background: yellow; padding: 5px; }
+                </style>
+            </head>
+            <body>
+                <h1>Content from Data URI</h1>
+                <p>This content is loaded via a <span class='highlight'>data URI</span>.</p>
+                <p>Advantages:</p>
+                <ul>
+                    <li>No external files needed</li>
+                    <li>No JavaScript required</li>
+                    <li>Self-contained</li>
+                </ul>
+            </body>
+            </html>
+        "></iframe>
+    </div>
+
+    <!-- Method 3: Using blob URL (requires minimal JS but no origin issues) -->
+    <div class="method-section">
+        <div class="method-title">Method 3: Using Blob URL (minimal JS)</div>
+        <p>Create a blob URL from HTML content:</p>
+        <iframe id="blob-iframe"></iframe>
+        <script>
+            // Minimal JavaScript to create blob URL
+            const htmlContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 20px; background: #f8e8f8; }
+                        h1 { color: #8b2c5a; }
+                        .box { border: 2px solid #8b2c5a; padding: 10px; margin: 10px 0; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Content from Blob URL</h1>
+                    <div class='box'>
+                        <p>This content is created using a blob URL.</p>
+                        <p>Uses minimal JavaScript but no origin restrictions.</p>
+                    </div>
+                    <p>This method is useful when you need to dynamically generate content.</p>
+                </body>
+                </html>
+            `;
+            
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const blobUrl = URL.createObjectURL(blob);
+            document.getElementById('blob-iframe').src = blobUrl;
+        </script>
+    </div>
+
+    <!-- Method 4: Using sandboxed iframe with srcdoc -->
+    <div class="method-section">
+        <div class="method-title">Method 4: Sandboxed iframe with srcdoc</div>
+        <p>Secure iframe with restricted permissions:</p>
+        <iframe sandbox="allow-scripts" srcdoc="
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f8f0; }
+                    h1 { color: #2c8b2c; }
+                    .secure { border: 2px solid #2c8b2c; padding: 10px; background: #f0fff0; }
+                </style>
+            </head>
+            <script>
+                console.log(window.location)
+            </script>
+            <body>
+                <h1>Sandboxed Content</h1>
+                <div class='secure'>
+                    <p>This iframe is sandboxed for security.</p>
+                    <p>Limited permissions but still no origin restrictions.</p>
+                </div>
+                <p>Sandbox attributes control what the iframe can do.</p>
+            </body>
+            </html>
+        "></iframe>
+    </div>
+
+    <!-- Original code for reference -->
+    <div class="method-section">
+        <div class="method-title">Original Code (for reference)</div>
+        <p>Your original approach using postMessage:</p>
+        <button onclick="testUf()">Populate (Original Method)</button>
+        <iframe id="uf" src="" frameborder="0">
+            <div>
+               child nodes inside iframe can only be interacted with through the iframe window object. This won't appear in DOM
+            </div>
+        </iframe>
+        <script>
+            const testUf = () => {
+                const elWin = document.getElementById("uf").contentWindow;
+                elWin.postMessage('test', '*');
+            }
+            
+            const populate = (win) => {
+                const title = win.document.createElement('div');
+                title.textContent = 'Deep child in iframe';
+                win.document.body.appendChild(title);
+            }
+            let elWin = document.getElementById("uf").contentWindow;
+            elWin.addEventListener('message', (e) => {
+                console.log('message', JSON.stringify(e))
+                populate(elWin);
+            })
+        </script>
+    </div>
+
+    <div class="method-section">
+        <div class="method-title">Method 5: using html inside iframe</div>
+        <p>This method is useful when you need to dynamically generate content.</p>
+        <iframe id="html-iframe" src="./index-2.html" frameborder="0">
+        </iframe>
+    </div>
+</body>
+</html>
