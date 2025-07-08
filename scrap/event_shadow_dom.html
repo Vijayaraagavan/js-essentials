@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <div id="shadow-root">
+        </div>
+        <div id="parent">
+            <div id="child">
+                <h1>Hello World</h1>
+            </div>
+        </div>
+    </div>
+    <script>
+        const shadow = document.getElementById('shadow-root').attachShadow({mode: 'closed'});
+        const div = document.createElement('div');
+        div.innerHTML = '<h1>Hello World tom</h1>';
+        shadow.appendChild(div);
+        div.addEventListener('click', (e) => {
+            console.log('shadow div clicked');
+            console.log('shadow div event path: ', e.composedPath(), 'is trusted: ', e.isTrusted)
+        });
+        const customEvent = new CustomEvent('click', {
+            detail: {
+                message: 'Hello World'
+            },
+            // composed: true
+        });
+        setTimeout(() => {
+            div.dispatchEvent(customEvent);
+        }, 1000);
+    </script>
+</body>
+<script>
+    const root = document.getElementById('root');
+    const parent = document.getElementById('parent');
+    const child = document.getElementById('child');
+    
+    child.addEventListener('click', () => {
+        console.log('child clicked');
+    });
+    parent.addEventListener('click', () => {
+        console.log('parent clicked');
+    }, {capture: true});
+    root.addEventListener('click', () => {
+        console.log('root clicked');
+    });
+</script>
+</html>
