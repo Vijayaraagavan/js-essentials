@@ -11,6 +11,8 @@
         <div id="parent">
             <div id="child">
                 <h1>Hello World</h1>
+            </div>
+            <div id="child-2">
                 <input type="text" placeholder="Enter your name">
                 <button>Submit</button>
                 <input type="checkbox" name="isAgree" id="isAgree">
@@ -33,10 +35,11 @@
     root.addEventListener('click', (e) => {
         console.log('root clicked');
         // e.stopPropagation();
-        // e.preventDefault();
     }, {capture: true});
     input.addEventListener('click', (e) => {
         console.log('checkbox clicked');
     });
+    root.style.pointerEvents = 'none';
+    // child.style.pointerEvents = 'auto';
 </script>
 </html>
