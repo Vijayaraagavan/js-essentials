@@ -7,12 +7,17 @@
     <script src="./variables.js"></script>
 </head>
 <script>
-    console.log("Hello");
     const removeElement = () => {
         const title = document.getElementById('title')
         window.arrays.push(title)
         title.remove()
     }
+    // document.addEventListener("DOMContentLoaded", (e) =>
+    //   console.log("DOMContentLoaded event from document")
+    // );
+    window.addEventListener("DOMContentLoaded", (e) =>
+      console.log("DOMContentLoaded event from window")
+    );
 </script>
 <body>
     <h1 id="title">Hello</h1>
