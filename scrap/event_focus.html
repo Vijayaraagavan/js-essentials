@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <div id="parent">
+            <div id="child">
+                <h1>Hello World</h1>
+            </div>
+            <div>
+                <input id="sibling" type="text" placeholder="Enter your name">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const root = document.getElementById('root');
+    const parent = document.getElementById('parent');
+    const child = document.getElementById('child');
+    const sibling = document.getElementById('sibling');
+    
+    child.addEventListener('click', () => {
+        console.log('child clicked');
+    });
+    parent.addEventListener('click', () => {
+        console.log('parent clicked');
+    });
+    root.addEventListener('click', (e) => {
+        console.log('root clicked');
+        console.log('event path: ', e.composedPath())
+    });
+    // add in root also
+    root.addEventListener('focus', () => {
+        console.log('root focused');
+    });
+    root.addEventListener('blur', () => {
+        console.log('root blurred');
+    });
+    root.addEventListener('input', () => {
+        console.log('root input');
+    });
+    sibling.addEventListener('focus', (e) => {
+        console.log('sibling focused', 'bubbles: ', e.bubbles);
+    });
+    sibling.addEventListener('blur', () => {
+        console.log('sibling blurred');
+    });
+    sibling.addEventListener('input', () => {
+        console.log('sibling input');
+    });
+</script>
+</html>
