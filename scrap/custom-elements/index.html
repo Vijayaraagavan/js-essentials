@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom elements</title>
+</head>
+<script>
+    class Combo extends HTMLElement {
+        constructor() {
+            super()
+            console.log('lets go')
+            const se = this.attachShadow({mode: 'open'});
+            se.innerHTML = '<div><h1>Go</h1><slot></slot></div>';
+            const sheet = new CSSStyleSheet();
+            sheet.replaceSync(`
+                :host {
+                    background-color: 'red';
+                }
+                    h1 {
+                        color: 'green';
+                    }
+            `)
+            se.adoptedStyleSheets = [sheet]
+        }
+        connectedCallback() {
+            console.log("Custom element added to page.");
+          }
+        
+          disconnectedCallback() {
+            console.log("Custom element removed from page.");
+          }
+        
+          connectedMoveCallback() {
+            console.log("Custom element moved with moveBefore()");
+          }
+        
+          adoptedCallback() {
+            console.log("Custom element moved to new page.");
+          }
+        
+          attributeChangedCallback(name, oldValue, newValue) {
+            console.log(`Attribute ${name} has changed.`);
+          }
+    }
+    customElements.define('combo-box', Combo)
+
+    const move = () => {
+        const el = document.getElementById('id');
+        el.style.position = 'relative';
+        el.style.top = el.style.top += 10;
+    }   
+</script>
+<body>
+    <combo-box id="tg">
+        <h1>Hi vijay</h1>
+    </combo-box>
+    <button onclick="move">Move</button>
+    
+</body>
+</html>

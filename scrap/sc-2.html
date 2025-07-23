@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stacking Context 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  </head>
+  <script>
+    function openDialog() {
+      document.getElementById('custom-modal').style.display = 'block';
+    }
+    function closeDialog() {
+      document.getElementById('custom-modal').style.display = 'none';
+    }
+    function boom() {
+      const target = document.getElementById('custom-modal')
+      const rect = target.getBoundingClientRect()
+      const x = rect.left + rect.width / 2
+      const y = rect.top + rect.height / 2
+      confetti({
+        particleCount: 300,
+        spread: 70,
+        origin: { x: 0.5, y: 0.5 }
+      });
+    }
+    </script>
+  <body>
+    <div id="content">
+      <div id="main">
+        <div id="main-content">
+          <h2>Welcome to Stacks</h2>
+          <p>
+            Stacks is a place to learn and grow. We are a community of learners
+            who are passionate about learning and growing.
+          </p>
+          <button
+            onclick="openDialog()"
+          >
+            open dialog
+          </button>
+        </div>
+        <div
+          id="custom-modal"
+          style="padding: 20px; background-color: rgb(210, 214, 143); position: absolute; z-index: 101; top: 50%; left: 50%; display: block; transform: translate(-50%, -50%);"
+        >
+          <h2>Custom Modal</h2>
+          <p>This is a custom modal</p>
+          <button onclick="closeDialog()">finish</button>
+          <button onclick="boom()">boom</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

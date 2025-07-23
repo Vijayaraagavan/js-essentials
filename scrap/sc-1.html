@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stacking Context 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1>Stacks</h1>
+        <div id="subtitle">A place to learn and grow</div>
+      </div>
+    </div>
+    <div id="content">
+      <div id="main">
+        <div id="main-content">
+          <h2>Welcome to Stacks</h2>
+          <p>
+            Stacks is a place to learn and grow. We are a community of learners
+            who are passionate about learning and growing.
+          </p>
+          <button
+            id="fm-button"
+            onclick="confetti({
+              particleCount: 100,
+              spread: 70,
+              origin: { y: 0.6 }
+            });"
+          >
+            pop confetti
+          </button>
+        </div>
+        <div
+          id="custom-modal"
+          style="margin-top: -50px; background-color: rgb(61, 79, 200); isolation: isolate; z-index: -3; position: relative;"
+        >
+          <h2>Custom Modal</h2>
+          <p>This is a custom modal</p>
+        </div>
+        <div id="sidebar" style="background-color: #f0f0f0">
+          <div id="sidebar-content">
+            <ul>
+              <li>Home</li>
+              <li>About</li>
+              <li>Logout</li>
+              <li>Profile</li>
+              <li>Settings</li>
+            </ul>
+          </div>
+        </div>
+        <!--  
+        <button onclick="document.getElementById('custom-modal').close()">
+            Close
+        </button>
+        <button id="open-dialog" onclick="window.dialog.showModal()">
+            Open Dialog
+        </button>
+        <button popovertarget="help">Get help</button>
+        <div id="footer" style="position: relative; z-index: 2">
+          <p>Copyright 2025 Digitory</p>
+        </div>
+        <dialog id="dialog">
+          <h2>Login</h2>
+          <p>Please login to continue</p>
+          <form>
+            <input type="text" placeholder="Username" />
+          </form>
+        </dialog>
+
+        <dialog id="dialog2">
+          <h2>Signup</h2>
+          <p>Please signup to continue</p>
+          <form>
+            <input type="text" placeholder="Username" />
+          </form>
+        </dialog>
+        <div
+          id="help"
+          popover
+          style="position: absolute; top: -150px; left: -150px"
+        >
+          Idea!!!
+        </div>
+    -->
+      </div>
+    </div>
+  </body>
+</html>

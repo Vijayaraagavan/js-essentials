@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stacking Context 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  </head>
+  <body>
+    <div class="rot"> 
+        <div id="content" style="position: absolute; z-index: 2;">
+            <p class="abs" style="z-index: 101;">Open the dialog</p>
+            <div id="tooltip" class="abs" style="z-index: 100;">
+                <p>Tooltip</p>
+            </div>
+        </div>
+        <div id="content-2" class="move" style="position: absolute; z-index: 1;">
+            <p class="abs" style="z-index: 101;">send the package</p>
+            <div id="tooltip-2" class="abs" style="z-index: 999999;">
+                <p>Tooltip 2</p>
+            </div>
+        </div>
+    </div>
+  </body>
+  <style>
+    .rot {
+        transform: translate(100px, 100px);
+    }
+    #content {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        text-align: center;
+        padding: 4px;
+    }
+    #content-2 {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        text-align: center;
+    }
+    .move {
+        left: 93px;
+        top: 22px;
+    }
+    .abs {
+        position: absolute;
+    }
+    #tooltip, #tooltip-2 {
+        background-color: rgb(236, 238, 236);
+        text-align: center;
+        color: black;
+    }
+    #content > p, #content-2 > p {
+        background-color: rgb(136, 207, 136);
+        text-align: center;
+    }
+</style>
+</html>
