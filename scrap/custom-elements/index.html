@@ -5,21 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom elements</title>
 </head>
+<style>
+    h1 {
+        color: green;
+    }
+    video::-webkit-media-controls-play-button {
+        background-color: blue;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+        background-color: blueviolet;
+    }
+</style>
 <script>
     class Combo extends HTMLElement {
         constructor() {
             super()
             console.log('lets go')
-            const se = this.attachShadow({mode: 'open'});
-            se.innerHTML = '<div><h1>Go</h1><slot></slot></div>';
+            const se = this.attachShadow({mode: 'closed'});
+            se.innerHTML = `<div>
+                <h1>Go</h1>
+                <input id="foo" type="range">
+                <slot></slot>
+            </div>`;
             const sheet = new CSSStyleSheet();
             sheet.replaceSync(`
                 :host {
                     background-color: 'red';
                 }
-                    h1 {
-                        color: 'green';
-                    }
             `)
             se.adoptedStyleSheets = [sheet]
         }
@@ -55,7 +67,10 @@
     <combo-box id="tg">
         <h1>Hi vijay</h1>
     </combo-box>
+    <input id="foo" type="range">
+
     <button onclick="move">Move</button>
+    <video src="/Users/vijay/Downloads/zzz" width="200" height="200" controls></video>
     
 </body>
 </html>
